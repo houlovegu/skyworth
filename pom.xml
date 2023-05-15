@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.skyworth</groupId>
+  <artifactId>skyworth</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>testS3</module>
+    <module>skyworth-common</module>
+    <module>skyworth-upms</module>
+  </modules>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.boot.version>2.7.11</spring.boot.version>
+    <aws.java.sdk.version>1.11.1000</aws.java.sdk.version>
+    <log4j2.version>2.5.2</log4j2.version>
+    <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
+    <hutool.version>5.8.16</hutool.version>
+    <fastjson.version>2.0.31</fastjson.version>
+    <lombok.version>1.18.26</lombok.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--    spring-boot    -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--   aws-java-sdk   -->
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-bom</artifactId>
+        <version>${aws.java.sdk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- spring-boot-starter-log4j2 -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-log4j2</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.oltu.oauth2</groupId>
+        <artifactId>org.apache.oltu.oauth2.client</artifactId>
+        <version>${oltu.oauth2.version}</version>
+      </dependency>
+
+      <!--	hutool utils	-->
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <scope>compile</scope>
+        <optional>true</optional>
+        <version>${lombok.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.7.11</version>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <!--解决找不到@profile.name@-->
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <profiles.active>dev</profiles.active>
+      </properties>
+    </profile>
+    <profile>
+      <id>prd</id>
+      <properties>
+        <profiles.active>prd</profiles.active>
+      </properties>
+    </profile>
+  </profiles>
+</project>

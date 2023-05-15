@@ -1,0 +1,89 @@
+oauth:
+  qrcode:
+    timeout: 300 #qrcode 二维码有效时间 秒
+  server:
+    state:
+      timeout: 300 #state 过期时间 秒
+    code:
+      timeout: 600 #code过期时间 秒
+server:
+  port: 8002
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    throw-exception-if-no-handler-found: true
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test_db?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF8&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+      #   数据源其他配置
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器端口号
+    port: 6379
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    # 设置密码
+    password: skyworth123
+    lettuce:
+      shutdown-timeout: 100
+      pool:
+        # 最大阻塞等待时间，负数表示没有限制
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 5
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中最大连接数，负数表示没有限制
+        max-active: 20
+
+mybatis-plus:
+  mapper-locations: classpath:com/skyworth/*/mapper/mapping/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    type-aliases-package: com.skyworth.*.*.entity
+
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    swaggerModelName: 实体类列表
+    enableReloadCacheParameter: false
+    enableAfterScript: true
+    enableHost: false
+    enableHostText: 172.24.76.247:8080
+    enableHomeCustom: true
+# 权限认证
+oa:
+  amazon:
+    authUrl: "https://www.amazon.com/ap/oa"
+    tokenUrl: "https://api.amazon.com/auth/o2/token"
+    clientId: "amzn1.application-oa2-client.5069407d05db4fd992adbb688f9f4316"
+    clientSecret: "amzn1.oa2-cs.v1.5d77d791de04233b88408ee69ce63d11ba5dcfe1e0387a7acb826502331837aa"
+    redirectUrl: "http://localhost:3000/#/login"
+    scopes: "profile"
+    responseType: code
+    user_profile_url: https://api.amazon.com/user/profile
