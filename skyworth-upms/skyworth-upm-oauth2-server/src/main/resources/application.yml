@@ -83,7 +83,16 @@ oa:
     tokenUrl: "https://api.amazon.com/auth/o2/token"
     clientId: "amzn1.application-oa2-client.5069407d05db4fd992adbb688f9f4316"
     clientSecret: "amzn1.oa2-cs.v1.5d77d791de04233b88408ee69ce63d11ba5dcfe1e0387a7acb826502331837aa"
-    redirectUrl: "http://localhost:3000/#/login"
+    redirectUrl: "https://localhost:8443/login"
     scopes: "profile"
     responseType: code
     user_profile_url: https://api.amazon.com/user/profile
+  google:
+    authUrl: "https://accounts.google.com/o/oauth2/auth"
+    tokenUrl: "https://www.googleapis.com/oauth2/v3/token"
+    clientId: "273221647301-racglb8a3u2erd9jlsfilesdaj4f5gc4.apps.googleusercontent.com"
+    clientSecret: "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"
+    redirectUrl: "https://localhost:8443/login"
+    scopes: "https://www.googleapis.com/auth/userinfo.profile"
+    responseType: code
+    user_profileUrl: https://www.googleapis.com/oauth2/v2/userinfo
