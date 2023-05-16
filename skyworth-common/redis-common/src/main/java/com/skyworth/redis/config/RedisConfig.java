@@ -53,7 +53,7 @@ public class RedisConfig {
         redisStandaloneConfiguration.setPort(redisProperties.getPort());
         redisStandaloneConfiguration.setPassword(RedisPassword.of(redisProperties.getPassword()));
         LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder()
-                .commandTimeout(Duration.ofMillis(redisProperties.getDatabase()))
+                .commandTimeout(Duration.ofMillis(redisProperties.getTimeout()))
                 .shutdownTimeout(Duration.ofMillis(redisProperties.getLettuce().getShutdownTimeout()))
                 .poolConfig(genericObjectPoolConfig)
                 .build();
